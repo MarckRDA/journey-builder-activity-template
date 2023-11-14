@@ -5,7 +5,6 @@ define(["postmonger"], function (Postmonger) {
   var authTokens = {};
   var payload = {};
   $(window).ready(onRender);
-  setupExampleTestHarness();
   document.getElementById("done").removeAttribute("disabled");
 
   connection.on("initActivity", initialize);
