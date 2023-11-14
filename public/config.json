@@ -20,6 +20,7 @@
             "description": "default",
             "product": "default",
             "icon":"default",
+            "notificationType": "default",
             "userId": "{{uuid}}"
            }],
           "outArguments": [],

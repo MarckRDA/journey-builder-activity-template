@@ -5,6 +5,7 @@ define(["postmonger"], function (Postmonger) {
   var authTokens = {};
   var payload = {};
   $(window).ready(onRender);
+  setupExampleTestHarness();
 
   connection.on("initActivity", initialize);
   connection.on("requestedTokens", onGetTokens);
@@ -16,7 +17,7 @@ define(["postmonger"], function (Postmonger) {
   );
   connection.on("requestedDataSources", onRequestedDataSources);
 
-  document.getElementById('done').addEventListener('click', save);
+  document.getElementById("done").addEventListener("click", save);
 
   function onRender() {
     // JB will respond the first time 'ready' is called with 'initActivity'
@@ -63,12 +64,14 @@ define(["postmonger"], function (Postmonger) {
       : {};
 
     console.log(inArguments);
+    const params = [];
 
     $.each(inArguments, function (index, inArgument) {
       $.each(inArgument, function (key, val) {
-        console.log(key + " : " + val);
+        console.log(`${key} - ${val}`)
       });
     });
+
     document.getElementById("done").removeAttribute("disabled");
 
     connection.trigger("updateButton", {
@@ -88,12 +91,22 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function save() {
-    var postcardURLValue = $("#postcard-url").val();
-    var postcardTextValue = $("#postcard-text").val();
+    activity.metaData.isConfigured = true;
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const product = document.getElementById("product");
+    const notificationType = document.getElementById("notificationType");
+    const icon = document.getElementById("icon");
+    const option = notificationType.options[notificationType.selectedIndex];
 
     payload["arguments"].execute.inArguments = [
       {
-        tokens: authTokens,
+        title,
+        description,
+        product,
+        icon,
+        notificationType: option,
+        userId: "{{uuid}}",
       },
     ];
 
@@ -103,4 +116,3 @@ define(["postmonger"], function (Postmonger) {
     connection.trigger("updateActivity", payload);
   }
 });
-
