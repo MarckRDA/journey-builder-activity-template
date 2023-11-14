@@ -6,6 +6,7 @@ define(["postmonger"], function (Postmonger) {
   var payload = {};
   $(window).ready(onRender);
   setupExampleTestHarness();
+  document.getElementById("done").removeAttribute("disabled");
 
   connection.on("initActivity", initialize);
   connection.on("requestedTokens", onGetTokens);
@@ -71,8 +72,6 @@ define(["postmonger"], function (Postmonger) {
         console.log(`${key} - ${val}`)
       });
     });
-
-    document.getElementById("done").removeAttribute("disabled");
 
     connection.trigger("updateButton", {
       button: "done",
