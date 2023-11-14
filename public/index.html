@@ -1,44 +1,87 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title></title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="vendor/salesforce-lightning-design-system/styles/salesforce-lightning-design-system.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script type="text/javascript" src="//code.jquery.com/git/jquery-git.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="vendor/salesforce-lightning-design-system/styles/salesforce-lightning-design-system.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/git/jquery-git.min.js"
+    ></script>
     <script type="text/javascript" src="js/require.js"></script>
     <script type="text/javascript">
-        (function () {
-            var config = {
-                baseUrl: 'js'
-            };
+      (function () {
+        var config = {
+          baseUrl: "js",
+        };
 
-            var dependencies = [
-                'customActivity'
-            ];
+        var dependencies = ["customActivity"];
 
-            require(config, dependencies);
-        })();
+        require(config, dependencies);
+      })();
     </script>
-</head>
+  </head>
 
-<body>
-    <div id="step1" class="step">
-        <div class="slds-grid">
-
-            <main class="slds-col slds-size--1-of-3 slds-p-horizontal--small">
-              <h1>Welcome to your activity!</h1>
-
-            </main>
-           
-            
-
+  <body>
+    <div class="slds-grid">
+      <main class="slds-col slds-size--1-of-3 slds-p-vertical--small">
+        <h1>Central de notificações - Cadastro</h1>
+        <div class="slds-select_container">
+          <label class="slds-form-element__label" for="title">Título</label>
+          <input
+            class="slds-form-element__label"
+            type="text"
+            name="title"
+            id="title"
+          />
+        </div>
+        <div class="slds-select_container">
+          <label class="slds-form-element__label" for="description"
+            >Descrição</label
+          >
+          <input type="text" name="description" id="description" />
         </div>
 
-    </div>
-</body>
+        <div class="slds-select_container">
+          <label class="slds-form-element__label" for="product">Produto</label>
+          <input type="text" name="title" id="product" />
+        </div>
+        <div class="slds-select_container">
+          <label class="slds-form-element__label" for="icon">Link do icone</label>
+          <input type="text" name="icon" id="icon" />
+        </div>
 
+        <label class="slds-form-element__label" for="notification-type"
+          >Tipo da notificação</label
+        >
+        <select class="slds-select" id="notification-type">
+          <option value="atualization">Atualização</option>
+          <option value="promotion">Promoção</option>
+        </select>
+        <div class="slds-docked-form-footer" style="justify-content: flex-end">
+          <button
+            id="cancel"
+            type="button"
+            class="slds-button slds-button_neutral"
+          >
+            Cancel
+          </button>
+          <button
+            id="done"
+            disabled
+            type="button"
+            class="slds-button slds-button_brand slds-m-right--medium"
+          >
+            Done
+          </button>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>

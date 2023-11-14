@@ -15,7 +15,13 @@
     },
     "arguments": {
         "execute": {
-           "inArguments":[],
+           "inArguments":[{
+            "title": "default",
+            "description": "default",
+            "product": "default",
+            "icon":"default",
+            "userId": "{{uuid}}"
+           }],
           "outArguments": [],
           "url": "https://custom-activity-template-22447af3d825.herokuapp.com/journeybuilder/execute",
            "verb": "POST",

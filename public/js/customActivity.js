@@ -1,104 +1,106 @@
-define([
-    'postmonger'
-], function (
-    Postmonger
-) {
-    'use strict';
+define(["postmonger"], function (Postmonger) {
+  "use strict";
 
-    var connection = new Postmonger.Session();
-    var authTokens = {};
-    var payload = {};
-    $(window).ready(onRender);
+  var connection = new Postmonger.Session();
+  var authTokens = {};
+  var payload = {};
+  $(window).ready(onRender);
 
-    connection.on('initActivity', initialize);
-    connection.on('requestedTokens', onGetTokens);
-    connection.on('requestedEndpoints', onGetEndpoints);
-    connection.on('requestedInteraction', onRequestedInteraction);
-    connection.on('requestedTriggerEventDefinition', onRequestedTriggerEventDefinition);
-    connection.on('requestedDataSources', onRequestedDataSources);
+  connection.on("initActivity", initialize);
+  connection.on("requestedTokens", onGetTokens);
+  connection.on("requestedEndpoints", onGetEndpoints);
+  connection.on("requestedInteraction", onRequestedInteraction);
+  connection.on(
+    "requestedTriggerEventDefinition",
+    onRequestedTriggerEventDefinition
+  );
+  connection.on("requestedDataSources", onRequestedDataSources);
 
-    connection.on('clickedNext', save);
-   
-    function onRender() {
-        // JB will respond the first time 'ready' is called with 'initActivity'
-        connection.trigger('ready');
+  document.getElementById('done').addEventListener('click', save);
 
-        connection.trigger('requestTokens');
-        connection.trigger('requestEndpoints');
-        connection.trigger('requestInteraction');
-        connection.trigger('requestTriggerEventDefinition');
-        connection.trigger('requestDataSources');  
+  function onRender() {
+    // JB will respond the first time 'ready' is called with 'initActivity'
+    connection.trigger("ready");
+    connection.trigger("initActivity");
+    connection.trigger("requestTokens");
+    connection.trigger("requestEndpoints");
+    connection.trigger("requestInteraction");
+    connection.trigger("requestTriggerEventDefinition");
+    connection.trigger("requestDataSources");
+  }
 
+  function onRequestedDataSources(dataSources) {
+    console.log("*** requestedDataSources ***");
+    console.log(dataSources);
+  }
+
+  function onRequestedInteraction(interaction) {
+    console.log("*** requestedInteraction ***");
+    console.log(interaction);
+  }
+
+  function onRequestedTriggerEventDefinition(eventDefinitionModel) {
+    console.log("*** requestedTriggerEventDefinition ***");
+    console.log(eventDefinitionModel);
+  }
+
+  function initialize(data) {
+    console.log("*** initialize ***");
+    console.log(data);
+    if (data) {
+      payload = data;
     }
 
-    function onRequestedDataSources(dataSources){
-        console.log('*** requestedDataSources ***');
-        console.log(dataSources);
-    }
+    var hasInArguments = Boolean(
+      payload["arguments"] &&
+        payload["arguments"].execute &&
+        payload["arguments"].execute.inArguments &&
+        payload["arguments"].execute.inArguments.length > 0
+    );
 
-    function onRequestedInteraction (interaction) {    
-        console.log('*** requestedInteraction ***');
-        console.log(interaction);
-     }
+    var inArguments = hasInArguments
+      ? payload["arguments"].execute.inArguments
+      : {};
 
-     function onRequestedTriggerEventDefinition(eventDefinitionModel) {
-        console.log('*** requestedTriggerEventDefinition ***');
-        console.log(eventDefinitionModel);
-    }
+    console.log(inArguments);
 
-    function initialize(data) {
-        console.log(data);
-        if (data) {
-            payload = data;
-        }
-        
-        var hasInArguments = Boolean(
-            payload['arguments'] &&
-            payload['arguments'].execute &&
-            payload['arguments'].execute.inArguments &&
-            payload['arguments'].execute.inArguments.length > 0
-        );
+    $.each(inArguments, function (index, inArgument) {
+      $.each(inArgument, function (key, val) {
+        console.log(key + " : " + val);
+      });
+    });
+    document.getElementById("done").removeAttribute("disabled");
 
-        var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
+    connection.trigger("updateButton", {
+      button: "done",
+      text: "done",
+      visible: true,
+    });
+  }
 
-        console.log(inArguments);
+  function onGetTokens(tokens) {
+    console.log(tokens);
+    authTokens = tokens;
+  }
 
-        $.each(inArguments, function (index, inArgument) {
-            $.each(inArgument, function (key, val) {
-                
-              
-            });
-        });
+  function onGetEndpoints(endpoints) {
+    console.log(endpoints);
+  }
 
-        connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
-        });
-    }
+  function save() {
+    var postcardURLValue = $("#postcard-url").val();
+    var postcardTextValue = $("#postcard-text").val();
 
-    function onGetTokens(tokens) {
-        console.log(tokens);
-        authTokens = tokens;
-    }
+    payload["arguments"].execute.inArguments = [
+      {
+        tokens: authTokens,
+      },
+    ];
 
-    function onGetEndpoints(endpoints) {
-        console.log(endpoints);
-    }
+    payload["metaData"].isConfigured = true;
 
-    function save() {
-        var postcardURLValue = $('#postcard-url').val();
-        var postcardTextValue = $('#postcard-text').val();
-
-        payload['arguments'].execute.inArguments = [{
-            "tokens": authTokens
-        }];
-        
-        payload['metaData'].isConfigured = true;
-
-        console.log(payload);
-        connection.trigger('updateActivity', payload);
-    }
-
-
+    console.log(payload);
+    connection.trigger("updateActivity", payload);
+  }
 });
+
