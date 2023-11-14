@@ -2,6 +2,9 @@
   "name": "jb-activity-template",
   "version": "1.0.0",
   "description": "Journey Builder Activity Template",
+  "engines": {
+    "node": "16.20.0"
+  },
   "scripts": {
     "start": "node app.js",
     "postinstall": "gulp default"
