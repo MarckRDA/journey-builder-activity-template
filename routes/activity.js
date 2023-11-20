@@ -11,7 +11,7 @@ exports.logExecuteData = [];
 
 function logData(req) {
     exports.logExecuteData.push({
-        body: Buffer.toString(req.body),
+        body: JSON.stringify(req.body),
         headers: req.headers,
         trailers: req.trailers,
         method: req.method,
