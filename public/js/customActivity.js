@@ -93,7 +93,7 @@ define(["postmonger"], function (Postmonger) {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const product = document.getElementById("product").value;
-    const notificationType = document.getElementById("notification-type");
+    const notificationType = document.getElementById("notification-type").value;
     const icon = document.getElementById("icon").value;
     const option = notificationType.options[notificationType.selectedIndex];
     console.log(title)
@@ -111,6 +111,7 @@ define(["postmonger"], function (Postmonger) {
         icon,
         notificationType: option,
         userId: "{{uuid}}",
+        "contactIdentifier": "{{Contact.Key}}"
       },
     ];
 
