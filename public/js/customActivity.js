@@ -111,8 +111,7 @@ define(["postmonger"], function (Postmonger) {
         product,
         icon,
         notificationType: option,
-        userId: "{{uuid}}",
-        "contactIdentifier": "{{Contact.Key}}"
+        "contactIdentifier": "{{Contact.cd_uuid}}"
       },
     ];
 

@@ -22,7 +22,7 @@
           "product": "default",
           "icon": "default",
           "notificationType": "default",
-          "contactIdentifier": "{{Contact.Key}}"
+          "contactIdentifier": "{{Contact.cd_uuid}}"
         }
       ],
       "outArguments": [],
