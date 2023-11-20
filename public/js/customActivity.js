@@ -5,7 +5,7 @@ define(["postmonger"], function (Postmonger) {
   var authTokens = {};
   var payload = {};
   $(window).ready(onRender);
-  document.getElementById("done").removeAttribute("disabled");
+  console.log(document.getElementById("title"))
 
   connection.on("initActivity", initialize);
   connection.on("requestedTokens", onGetTokens);
@@ -89,13 +89,13 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function save() {
-    activity.metaData.isConfigured = true;
     const title = document.getElementById("title");
     const description = document.getElementById("description");
     const product = document.getElementById("product");
     const notificationType = document.getElementById("notificationType");
     const icon = document.getElementById("icon");
     const option = notificationType.options[notificationType.selectedIndex];
+    activity.metaData.isConfigured = true;
 
     payload["arguments"].execute.inArguments = [
       {
