@@ -5,6 +5,7 @@ define(["postmonger"], function (Postmonger) {
   var authTokens = {};
   var payload = {};
   $(window).ready(onRender);
+  document.getElementById("done").removeAttribute("disabled");
   console.log(document.getElementById("title"))
 
   connection.on("initActivity", initialize);
