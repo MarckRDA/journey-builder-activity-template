@@ -90,18 +90,18 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function save() {
-    const title = document.getElementById("title");
-    const description = document.getElementById("description");
-    const product = document.getElementById("product");
-    const notificationType = document.getElementById("notificationType");
-    const icon = document.getElementById("icon");
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const product = document.getElementById("product").value;
+    const notificationType = document.getElementById("notificationType").value;
+    const icon = document.getElementById("icon").value;
     console.log(title)
     console.log(description)
     console.log(product)
     console.log(notificationType)
     console.log(icon)
     //const option = notificationType.options[notificationType.selectedIndex];
-    activity.metaData.isConfigured = true;
+    //activity.metaData.isConfigured = true;
 
     payload["arguments"].execute.inArguments = [
       {
