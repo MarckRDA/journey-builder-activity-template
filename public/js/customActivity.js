@@ -95,13 +95,12 @@ define(["postmonger"], function (Postmonger) {
     const product = document.getElementById("product").value;
     const notificationType = document.getElementById("notification-type");
     const icon = document.getElementById("icon").value;
-    const option = notificationType.options[notificationType.selectedIndex];
+    const option = notificationType.options[notificationType.selectedIndex].value;
     console.log(title)
     console.log(description)
     console.log(product)
     console.log(option)
     console.log(icon)
-    console.log(notificationType.options)
     //activity.metaData.isConfigured = true;
 
     payload["arguments"].execute.inArguments = [

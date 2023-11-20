@@ -11,7 +11,7 @@ exports.logExecuteData = [];
 
 function logData(req) {
     exports.logExecuteData.push({
-        body: req.body,
+        body: Buffer.toString(req.body),
         headers: req.headers,
         trailers: req.trailers,
         method: req.method,
@@ -86,7 +86,8 @@ exports.execute = function (req, res) {
             
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
-            
+            console.log(decoded)
+            console.log(decodedArgs)
             logData(req);
             res.send(200, 'Execute');
         } else {
