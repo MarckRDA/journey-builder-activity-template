@@ -29,7 +29,7 @@ function logData(req) {
         secure: req.secure,
         originalUrl: req.originalUrl
     });
-    console.log("body: " + JSON.stringify(req.body.data.toJSON()));
+    console.log("body: " + JSON.stringify(req.body?.data?.toJSON()));
     console.log("headers: " + req.headers);
     console.log("trailers: " + req.trailers);
     console.log("method: " + req.method);
