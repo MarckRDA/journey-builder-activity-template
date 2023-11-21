@@ -11,7 +11,7 @@ exports.logExecuteData = [];
 
 function logData(req) {
     exports.logExecuteData.push({
-        body: JSON.stringify(req.body?.data),
+        body: JSON.stringify(req.body),
         headers: req.headers,
         trailers: req.trailers,
         method: req.method,
@@ -29,7 +29,7 @@ function logData(req) {
         secure: req.secure,
         originalUrl: req.originalUrl
     });
-    console.log("body: " + JSON.stringify(req.body?.data?.toJSON()));
+    console.log("body: " + JSON.stringify(req.body?.toJSON()));
     console.log("headers: " + req.headers);
     console.log("trailers: " + req.trailers);
     console.log("method: " + req.method);
